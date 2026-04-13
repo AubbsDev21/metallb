@@ -4,6 +4,7 @@ website/public
 dev-env/unittest/bin
 .envrc
 junit-report.xml
+.venv
 
 # Hugo
 .hugo_build.lock

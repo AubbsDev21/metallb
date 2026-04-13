@@ -1,3 +1,4 @@
+{{ - if and .Values.crds.enabled (and .Values.crds.bgp.enabled .Values.crds.bgp.bfdProfiles) }}
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -118,7 +119,10 @@ spec:
       storage: true
       subresources:
         status: {}
+{{- end }}
 ---
+
+{{ - if and .Values.crds.enabled (and .Values.crds.bgp.enabled .Values.crds.bgp.bgpAdvertisements) }}
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -324,7 +328,9 @@ spec:
       storage: true
       subresources:
         status: {}
+{{- end }}
 ---
+{{ - if and .Values.crds.enabled (and .Values.crds.bgp.enabled .Values.crds.bgp.bgpPeers) }}
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -688,7 +694,9 @@ spec:
       storage: true
       subresources:
         status: {}
+{{- end }}
 ---
+{{ - if and .Values.crds.enabled (and .Values.crds.core.enabled .Values.crds.core.communities) }}
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -753,7 +761,9 @@ spec:
       storage: true
       subresources:
         status: {}
+{{- end }}
 ---
+{{ - if and .Values.crds.enabled (and .Values.crds.core.enabled .Values.crds.core.configurationStates) }}
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -885,7 +895,9 @@ spec:
       storage: true
       subresources:
         status: {}
+{{- end }}
 ---
+{{ - if and .Values.crds.enabled (and .Values.crds.core.enabled .Values.crds.core.ipAddressPools) }}
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -1117,7 +1129,9 @@ spec:
       storage: true
       subresources:
         status: {}
+{{- end }}
 ---
+{{ - if and .Values.crds.enabled (and .Values.crds.layer2.enabled .Values.crds.layer2.l2Advertisements) }}
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -1297,7 +1311,9 @@ spec:
       storage: true
       subresources:
         status: {}
+{{- end }}
 ---
+{{ - if and .Values.crds.enabled (and .Values.crds.bgp.enabled .Values.crds.bgp.serviceBgpStatuses) }}
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -1382,7 +1398,9 @@ spec:
       storage: true
       subresources:
         status: {}
+{{- end }}
 ---
+{{ - if and .Values.crds.enabled (and .Values.crds.layer2.enabled .Values.crds.layer2.serviceL2Statuses) }}
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -1470,3 +1488,4 @@ spec:
       storage: true
       subresources:
         status: {}
+{{- end }}

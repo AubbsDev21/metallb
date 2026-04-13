@@ -1,0 +1,17 @@
+crds:
+  enabled: true       # Master Switch
+  core:               # Essential CRDs everyone needs
+    enabled: true
+    ipAddressPools: true
+    communities: true
+    configurationStates: true
+  layer2:             # L2 specific
+    enabled: true
+    l2Advertisements: true
+    serviceL2Statuses: true
+  bgp:                # BGP specific
+    enabled: true
+    bgpPeers: true
+    bgpAdvertisements: true
+    bfdProfiles: true
+    serviceBgpStatuses: true
