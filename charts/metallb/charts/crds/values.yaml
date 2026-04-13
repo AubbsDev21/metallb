@@ -1,15 +1,36 @@
+# -- Custom Resource Definitions (CRDs) --
+# These toggles control the installation of MetalLB's CRDs via this Helm chart.
+#
+# Example (Detached Installation):
+#   helm install metallb-crds metallb/metallb-crds
+#   helm install metallb metallb/metallb --set crds.enabled=false
+#
+# Granular Control:
+# You can selectively disable specific protocol CRDs or individual components 
+# to reduce API server overhead and match your exact cluster architecture.
+#
+# Example (Layer 2 Only Installation - Group Toggle):
+#   helm install metallb metallb/metallb --set crds.bgp.enabled=false
+#
+# Example (Surgical Control - Individual Toggle):
+#   helm install metallb metallb/metallb --set crds.bgp.bfdProfiles=false
 crds:
-  enabled: true       # Master Switch
-  core:               # Essential CRDs everyone needs
+   # -- Master switch to enable/disable all CRD installation via Helm.
+  enabled: true
+
+  core:
+   # -- Enable core CRDs required by all MetalLB deployments.       
     enabled: true
     ipAddressPools: true
     communities: true
     configurationStates: true
-  layer2:             # L2 specific
+  layer2:
+    # -- Enable CRDs specific to Layer 2 routing.           
     enabled: true
     l2Advertisements: true
     serviceL2Statuses: true
-  bgp:                # BGP specific
+  bgp:
+    # -- Enable CRDs specific to BGP routing.              
     enabled: true
     bgpPeers: true
     bgpAdvertisements: true
