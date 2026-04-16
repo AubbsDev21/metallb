@@ -10,28 +10,40 @@
 # to reduce API server overhead and match your exact cluster architecture.
 #
 # Example (Layer 2 Only Installation - Group Toggle):
-#   helm install metallb metallb/metallb --set crds.bgp.enabled=false
+#   helm install metallb metallb/metallb --set crds.bgp.enableGroup=false
 #
 # Example (Surgical Control - Individual Toggle):
 #   helm install metallb metallb/metallb --set crds.bgp.bfdProfiles=false
+#
+# Single CRD Installation (Opt-Out Model):
+# Because all CRDs default to true, installing ONLY a single CRD requires 
+# explicitly disabling the other groups and components you do not want.
+#
+# Example (Install ONLY BFD Profiles):
+#   helm install metallb metallb/metallb \
+#     --set crds.core.enableGroup=false \
+#     --set crds.layer2.enableGroup=false \
+#     --set crds.bgp.bgpPeers=false \
+#     --set crds.bgp.bgpAdvertisements=false \
+#     --set crds.bgp.serviceBgpStatuses=false
 crds:
    # -- Master switch to enable/disable all CRD installation via Helm.
   enabled: true
 
   core:
    # -- Enable core CRDs required by all MetalLB deployments.       
-    enabled: true
+    enableGroup: true
     ipAddressPools: true
     communities: true
     configurationStates: true
   layer2:
-    # -- Enable CRDs specific to Layer 2 routing.           
-    enabled: true
+  # -- Enable the CRD group specific to Layer 2 routing.         
+    enableGroup: true
     l2Advertisements: true
     serviceL2Statuses: true
   bgp:
-    # -- Enable CRDs specific to BGP routing.              
-    enabled: true
+  # -- Enable the CRD group specific to BGP routing.              
+    enableGroup: true
     bgpPeers: true
     bgpAdvertisements: true
     bfdProfiles: true
